@@ -1,7 +1,6 @@
 
-.abc123 {
-  outline: 30px dashed lime;
-}
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 .iridescent-text {
   background: linear-gradient(45deg, #7FFFD4, #8A2BE2, #00FFFF, #FFD700);
@@ -132,5 +131,19 @@ body {
 
 h1, h2, h3, h4, h5, h6, p, a, span, div {
   color: inherit;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.iridescent-text {
+  background: linear-gradient(90deg, #00ffe0, #a34df7, #ff00c8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
 
