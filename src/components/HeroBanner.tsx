@@ -2,7 +2,7 @@
 import React from 'react';
 import './HeroBanner.css';
 
-export default function HeroBanner(): JSX.Element {
+export default function HeroBanner() {
   return (
     <div className="hero-banner">
       <h1 className="hero-title">Iris Infinity Studio</h1>
