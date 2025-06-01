@@ -1,0 +1,136 @@
+
+.abc123 {
+  outline: 30px dashed lime;
+}
+
+.iridescent-text {
+  background: linear-gradient(45deg, #7FFFD4, #8A2BE2, #00FFFF, #FFD700);
+  background-size: 300% 300%;
+  background-clip: text;             /* ✅ Standard */
+  -webkit-background-clip: text;     /* ✅ For Safari */
+  -webkit-text-fill-color: transparent;
+  animation: iridescent-glow 5s ease infinite;
+}
+body {
+  background-color: #000000;
+  color: #F5F5F5;
+  font-family: 'Sora', sans-serif;
+  margin: 0;
+}
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #000000; /* Optional: ensures dark background if you want it */
+}
+.hero-banner {
+  position: relative;
+  height: 100vh;
+  background-image: url('/images/IrisBanner.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.75));
+  z-index: 1;
+}
+
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.15;
+  animation: stars-float 60s linear infinite;
+  z-index: 2;
+}
+
+@keyframes stars-float {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 1000px; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  padding: 2rem;
+  text-wrap: balance;
+}
+
+.brand-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
+}
+
+.hero-subtext {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin-bottom: 2rem;
+}
+
+.glowing-btn {
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 0.75rem 2rem;
+  background-color: #8A2BE2;
+  border: none;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px #8A2BE2;
+  transition: all 0.3s ease;
+  color: white;
+  text-decoration: none;
+}
+
+.glowing-btn:hover {
+  box-shadow: 0 0 30px #8A2BE2, 0 0 60px #8A2BE2;
+  transform: scale(1.05);
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+.fade-in:nth-child(1) { animation-delay: 0.2s; }
+.fade-in:nth-child(2) { animation-delay: 0.6s; }
+.fade-in:nth-child(3) { animation-delay: 1s; }
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chevron-down {
+  margin-top: 2rem;
+  font-size: 2rem;
+  animation: bounce 2s infinite;
+  opacity: 0.6;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, div {
+  color: inherit;
+}
+
