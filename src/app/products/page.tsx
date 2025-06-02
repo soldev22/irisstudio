@@ -29,7 +29,7 @@ export default function ProductsContent() {
     },
     {
       title: '1000 x 1000 Print',
-      image: '1000x1000.png',
+      image: 'infinityirisis.png',
       price: '£120',
       desc: 'Gallery-sized art with nebula overlays and personal star alignment.',
     },
@@ -70,7 +70,7 @@ export default function ProductsContent() {
                 </div>
                 <div className="mt-3 d-flex justify-content-between align-items-end">
                   <span className="fw-bold text-white">{product.price}</span>
-                  <button className="btn btn-outline-light btn-sm">Buy Now</button>
+                  <button className="btn btn-outline-light btn-sm">Buy Now / Voucher</button>
                 </div>
               </div>
             </div>
