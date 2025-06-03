@@ -70,7 +70,24 @@ export default function ProductsContent() {
                 </div>
                 <div className="mt-3 d-flex justify-content-between align-items-end">
                   <span className="fw-bold text-white">{product.price}</span>
-                  <button className="btn btn-outline-light btn-sm">Buy Now / Voucher</button>
+                  <button
+  className="btn btn-outline-light btn-sm"
+  onClick={async () => {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: product.title, price: product.price }),
+    });
+
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    }
+  }}
+>
+  Buy Now / Voucher
+</button>
+
                 </div>
               </div>
             </div>
