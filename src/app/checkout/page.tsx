@@ -19,14 +19,12 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  
-
-
   const handleCheckout = async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/checkout', {
+      // Save precheckout details
+      const saveRes = await fetch('/api/precheckout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,10 +40,27 @@ export default function CheckoutPage() {
         }),
       });
 
-      if (!res.ok) {
-        const msg = await res.text();
-        throw new Error(msg || 'Checkout failed');
+      if (!saveRes.ok) {
+        const msg = await saveRes.text();
+        throw new Error(msg || 'Failed to save data');
       }
+
+      // Proceed to Stripe
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: product,
+          price,
+          email,
+          phone,
+          name,
+          address,
+          city,
+          postcode,
+          country,
+        }),
+      });
 
       const data = await res.json();
       if (data.url) {
