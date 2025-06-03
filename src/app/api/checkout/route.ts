@@ -1,23 +1,33 @@
-import { sendConfirmationEmail } from '@/lib/notifications/sendConfirmationEmail';
+// src/app/api/checkout/route.ts
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2022-11-15', // or upgrade the Stripe SDK to use later versions
+  apiVersion: '2022-11-15',
 });
 
 export async function POST(req: Request) {
   try {
-    const { title, price } = await req.json();
+    const {
+      title,
+      price,
+      name,
+      email,
+      phone,
+      address,
+      city,
+      postcode,
+      country,
+    } = await req.json();
 
-    if (!title || !price) {
-      return NextResponse.json({ error: 'Missing title or price' }, { status: 400 });
+    if (!title || !price || !name || !email || !address || !city || !postcode || !country) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     const amountInPence = parseInt(price.replace('£', '').trim()) * 100;
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card','klarna'],
+      payment_method_types: ['card', 'klarna'],
       line_items: [
         {
           price_data: {
@@ -31,8 +41,19 @@ export async function POST(req: Request) {
       mode: 'payment',
       success_url: 'http://localhost:3000/payment/success',
       cancel_url: 'http://localhost:3000/payment/cancel',
+      metadata: {
+        title,
+        price: (amountInPence / 100).toFixed(2),
+        name,
+        email,
+        phone,
+        address,
+        city,
+        postcode,
+        country,
+      },
     });
-await sendConfirmationEmail('mike@solutionsdeveloped.co.uk', 'Test User', title);
+
     return NextResponse.json({ url: session.url });
   } catch (err: any) {
     console.error('Stripe Checkout Error:', err.message);

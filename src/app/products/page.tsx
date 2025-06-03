@@ -1,10 +1,14 @@
 'use client';
 
 import Image from 'next/image';
+import router from 'next/router';
+import { useRouter } from 'next/navigation'; // add this at the top of your component
 import { useState } from 'react';
 
 export default function ProductsContent() {
   const [loadingIndex, setLoadingIndex] = useState<number | null>(null);
+  const router = useRouter(); // inside your ProductsContent function
+
 
   const products = [
     {
@@ -105,13 +109,15 @@ export default function ProductsContent() {
                 </div>
                 <div className="mt-3 d-flex justify-content-between align-items-end">
                   <span className="fw-bold text-white">{product.price}</span>
-                  <button
-                    className="btn btn-outline-light btn-sm"
-                    onClick={() => handleCheckout(product, i)}
-                    disabled={loadingIndex === i}
-                  >
-                    {loadingIndex === i ? 'Processing...' : 'Buy Now'}
-                  </button>
+                 <button
+  className="btn btn-outline-light btn-sm"
+  onClick={() => {
+    const cleanPrice = product.price.replace('£', '');
+    router.push(`/checkout?product=${encodeURIComponent(product.title)}&price=${cleanPrice}`);
+  }}
+>
+  Buy Now
+</button>
                 </div>
               </div>
             </div>
