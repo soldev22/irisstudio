@@ -1,7 +1,11 @@
 'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function ProductsContent() {
+  const [loadingIndex, setLoadingIndex] = useState<number | null>(null);
+
   const products = [
     {
       title: 'Base Product',
@@ -41,6 +45,37 @@ export default function ProductsContent() {
     },
   ];
 
+  const handleCheckout = async (product: { title: string; price: string }, index: number) => {
+    setLoadingIndex(index);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: product.title, price: product.price }),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('Checkout API failed:', text);
+        alert(`Checkout failed: ${text}`);
+        return;
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Stripe session URL not returned.');
+        console.error('Invalid response:', data);
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      alert('Failed to start checkout.');
+    } finally {
+      setLoadingIndex(null);
+    }
+  };
+
   return (
     <main className="container text-white pt-5" style={{ paddingTop: '100px' }}>
       <h1 className="iridescent-text mb-4">Our Products</h1>
@@ -71,23 +106,12 @@ export default function ProductsContent() {
                 <div className="mt-3 d-flex justify-content-between align-items-end">
                   <span className="fw-bold text-white">{product.price}</span>
                   <button
-  className="btn btn-outline-light btn-sm"
-  onClick={async () => {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: product.title, price: product.price }),
-    });
-
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    }
-  }}
->
-  Buy Now / Voucher
-</button>
-
+                    className="btn btn-outline-light btn-sm"
+                    onClick={() => handleCheckout(product, i)}
+                    disabled={loadingIndex === i}
+                  >
+                    {loadingIndex === i ? 'Processing...' : 'Buy Now'}
+                  </button>
                 </div>
               </div>
             </div>
