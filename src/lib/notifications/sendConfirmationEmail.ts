@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY!;
-const SENDER_EMAIL = 'studio@yourdomain.com'; // Replace with your verified Brevo sender
+const SENDER_EMAIL = 'mike@solutionsdeveloped.co.uk'; // Replace with your verified Brevo sender
 
 type EmailType = 'success' | 'cancel' | 'fail';
 
