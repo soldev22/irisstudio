@@ -1,6 +1,8 @@
 // src/app/api/checkout/route.ts
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import dbConnect from '@/lib/db';
+import PreCheckout from '@/lib/models/PreCheckout';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2022-11-15',
@@ -25,6 +27,20 @@ export async function POST(req: Request) {
     }
 
     const amountInPence = parseInt(price.replace('£', '').trim()) * 100;
+
+    await dbConnect();
+
+    await PreCheckout.create({
+      title,
+      price,
+      name,
+      email,
+      phone,
+      address,
+      city,
+      postcode,
+      country,
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'klarna'],
