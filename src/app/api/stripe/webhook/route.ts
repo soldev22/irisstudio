@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { sendConfirmationEmail } from '@/lib/notifications/sendConfirmationEmail';
+import { connectToDatabase } from '@/lib/db';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2022-11-15',
@@ -38,6 +39,7 @@ export async function POST(req: NextRequest) {
     const price = session.metadata?.price || '0.00';
     const title = session.metadata?.title || 'Unknown Product';
 
+    // ✅ Send customer confirmation
     await sendConfirmationEmail(
       email,
       name,
@@ -50,6 +52,7 @@ export async function POST(req: NextRequest) {
       country
     );
 
+    // ✅ Send admin alert
     await sendConfirmationEmail(
       'mike@solutionsdeveloped.co.uk',
       name,
@@ -61,6 +64,19 @@ export async function POST(req: NextRequest) {
       postcode,
       country
     );
+
+    // ✅ Update order in DB to mark as paid
+    try {
+      const { db } = await connectToDatabase();
+      await db.collection('orders').findOneAndUpdate(
+        { email }, // match most recent by email
+        { $set: { paid: true, paidAt: new Date() } },
+        { sort: { createdAt: -1 } }
+      );
+      console.log(`✅ Order marked as paid for ${email}`);
+    } catch (err) {
+      console.error(`❌ Failed to update order status for ${email}:`, err);
+    }
   } else {
     console.warn(`⚠️ Unhandled event type: ${event.type}`);
   }
