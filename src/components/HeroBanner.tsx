@@ -13,10 +13,10 @@ export default function HeroBanner() {
   <a href="/book" className="btn btn-primary btn-lg px-4">
     Book Your Session
   </a>
-  <a href="/products" className="btn btn-outline-light btn-lg px-4">
-    Find Out More
+  <a href="/products" className="btn btn-primary btn-lg px-4">
+    Our Products
   </a>
-  <a href="/voucher" className="btn btn-outline-light btn-lg px-4">
+  <a href="/voucher" className="btn btn-primary btn-lg px-4">
     🎁 Buy for a Friend
   </a>
 </div>
