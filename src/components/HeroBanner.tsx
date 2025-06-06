@@ -16,9 +16,9 @@ export default function HeroBanner() {
   <a href="/products" className="btn btn-primary btn-lg px-4">
     Our Products
   </a>
-  <a href="/voucher" className="btn btn-primary btn-lg px-4">
-    🎁 Buy for a Friend
-  </a>
+ <a href="/products/gift-voucher" className="btn btn-primary btn-lg px-4">
+  🎁 Buy for a Friend
+</a>
 </div>
 
     </div>
