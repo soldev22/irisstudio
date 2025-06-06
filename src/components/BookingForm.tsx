@@ -89,7 +89,7 @@ export default function BookingForm() {
       </div>
 
       <div className="mb-3">
-        <label className="form-label">Select a Date</label>
+        <label className="form-label">Select a Date</label> &nbsp;&nbsp;
         <DatePicker
           selected={selectedDate ?? undefined}
           onChange={date => setSelectedDate(date)}
