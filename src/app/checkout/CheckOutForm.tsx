@@ -105,6 +105,9 @@ export default function CheckoutForm() {
         <p className="fw-bold text-center mb-4">
           Price: £{product.price.toFixed(2)}
         </p>
+      <p className="text-center">
+  Even if you are ordering a voucher please provide your own details and we will email you the voucher which you can forward
+</p>
 
         <div className="mb-3">
           <label className="form-label">Name</label>

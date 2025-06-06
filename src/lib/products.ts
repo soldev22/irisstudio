@@ -51,4 +51,12 @@ export const allProducts: Product[] = [
     price: 75,
     desc: 'A wearable soul print. Your iris transformed into a handcrafted pendant — available in silver or gold finishes with optional engraving to make it unmistakably yours.',
   },
+  {
+  slug: 'gift-voucher',
+  title: 'Iris Infinity Gift Voucher',
+  image: 'voucher.png',
+  price: 45,
+  desc: 'Looking for a truly unforgettable gift? An Iris Infinity Studio voucher (with a unique, one-time-use code) gives your loved one the chance to capture the unique beauty of their eye — transformed into cosmic art. Perfect for birthdays, anniversaries, or “just because” moments. Let them choose their date and style, and we’ll handle the magic..',
+}
+
 ];

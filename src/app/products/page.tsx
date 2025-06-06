@@ -20,7 +20,7 @@ export default function ProductsPage() {
 
       <div className="row gy-4">
         {allProducts.map((product, i) => (
-          <div key={i} className="col-12 col-sm-6 col-lg-4">
+          <div key={product.slug} className="col-12 col-sm-6 col-lg-4">
             <div className="card bg-dark text-white border-secondary h-100 shadow d-flex flex-column">
               <div className="ratio ratio-4x3">
                 <Image
@@ -40,9 +40,12 @@ export default function ProductsPage() {
                   <span className="fw-bold text-white">£{product.price}</span>
                   <button
                     className="btn btn-outline-light btn-sm"
-                    onClick={() => router.push(`/products/${product.slug}`)}
+                    onClick={() => {
+                      setLoadingIndex(i);
+                      router.push(`/products/${product.slug}`);
+                    }}
                   >
-                    Find Out More
+                    {loadingIndex === i ? 'Loading...' : 'Find Out More'}
                   </button>
                 </div>
               </div>
