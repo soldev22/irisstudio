@@ -9,15 +9,20 @@ export default function HeroBanner() {
       <p className="hero-subtext">
         Star maps, soul prints, and iris photography.
       </p>
+<div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+  <a href="/book" className="btn btn-primary btn-lg px-4">
+    Book Your Session
+  </a>
+  <a href="/products" className="btn btn-outline-light btn-lg px-4">
+    Find Out More
+  </a>
+  <a href="/voucher" className="btn btn-outline-light btn-lg px-4">
+    🎁 Buy for a Friend
+  </a>
+</div>
 
-      <div className="hero-buttons">
-        <a href="/booking" className="hero-button">
-          Book Your Session
-        </a><span> &nbsp;&nbsp;&nbsp;  </span>
-        <a href="/about" className="hero-button secondary">
-          Find Out More
-        </a>
-      </div>
     </div>
+    
   );
+  
 }
