@@ -20,6 +20,11 @@ export default function HeroBanner() {
   🎁 Buy for a Friend
 </a>
 </div>
+<br></br><br></br>
+
+<span style={{ fontSize: '1.5rem' }}>The Crown Hub <br></br>11 Main Street Thornton<br></br> Fife KY1 4AF</span><br></br>
+<span style={{ fontSize: '1.2rem', fontWeight: 600 }}>07739 870670</span>
+
 
     </div>
     
