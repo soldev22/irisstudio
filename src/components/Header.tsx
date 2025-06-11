@@ -19,6 +19,7 @@ export default function Header() {
     { href: '/book', label: 'Book a Session' },
     { href: '/products', label: 'Products' },
     { href: '/contact', label: 'Contact' },
+    { href:  '/about/what-to-expect', label: 'What to Expect'}
   ];
 
   return (
